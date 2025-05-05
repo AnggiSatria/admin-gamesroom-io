@@ -1,7 +1,4 @@
 import jwt from 'jsonwebtoken';
-// /lib/prisma.ts
-import { PrismaClient } from '@prisma/client';
-export const prisma = new PrismaClient();
 
 export function verifyToken(token: string) {
   return jwt.verify(token, process.env.JWT_SECRET!);
