@@ -77,7 +77,7 @@ export default function useHooksCreateGame() {
 
       const response = await mutations.mutateAsync(formData);
 
-      if (response?.status === 200) {
+      if (response?.status === 200 || response?.status === 201) {
         toast.success(
           response && response?.data
             ? response && response?.data?.data?.message
