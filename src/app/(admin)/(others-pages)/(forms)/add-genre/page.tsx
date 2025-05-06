@@ -1,8 +1,8 @@
 import PageBreadcrumb from '@/components/common/PageBreadCrumb';
-import InputStates from '@/components/form/form-elements/InputStates';
-import Button from '@/components/ui/button/Button';
+import AddGenres from '@/components/form/AddGenre/AddGenre';
 import { Metadata } from 'next';
 import React from 'react';
+import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
   title: 'Add Genre',
@@ -12,13 +12,9 @@ export const metadata: Metadata = {
 export default function AddGenre() {
   return (
     <div>
+      <Toaster />
       <PageBreadcrumb pageTitle="Form Add Genre" />
-      <div className="grid grid-cols-1 gap-6">
-        <div className="space-y-6">
-          <InputStates selectedPages="Add Genre" />
-          <Button className="w-full">Add Genre</Button>
-        </div>
-      </div>
+      <AddGenres />
     </div>
   );
 }

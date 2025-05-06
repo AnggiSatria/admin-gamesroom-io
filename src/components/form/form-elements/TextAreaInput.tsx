@@ -1,19 +1,19 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import ComponentCard from '../../common/ComponentCard';
 import TextArea from '../input/TextArea';
+import { Controller } from 'react-hook-form';
 
-export default function TextAreaInput() {
-  const [message, setMessage] = useState('');
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function TextAreaInput({ form }: { form: any }) {
   return (
     <ComponentCard title="Game Description">
       <div className="space-y-6">
-        {/* Default TextArea */}
         <div>
-          <TextArea
-            value={message}
-            onChange={(value) => setMessage(value)}
-            rows={6}
+          <Controller
+            name="description"
+            control={form.control}
+            render={({ field }) => <TextArea rows={6} {...field} />}
           />
         </div>
       </div>

@@ -10,19 +10,17 @@ import { IResponseGenreList } from '@/shared/lib/helpers/client/services/interfa
 import { useReadPlatforms } from '@/shared/lib/helpers/client/services/platforms';
 import { IResponseGetPlatformList } from '@/shared/lib/helpers/client/services/interfaces/platform.interfaces';
 import { IResponseGetGameById } from '@/shared/lib/helpers/client/services/interfaces/games.interfaces';
+import { Controller } from 'react-hook-form';
+
 export default function DefaultInputs({
   selectedPages,
-  game,
+  form,
 }: {
   selectedPages: string;
   game: IResponseGetGameById | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  form: any;
 }) {
-  console.log(game);
-
-  const handleSelectChange = (value: string) => {
-    console.log('Selected value:', value);
-  };
-
   const activeFilter = {
     search: '',
     page: '',
@@ -51,17 +49,36 @@ export default function DefaultInputs({
       <div className="space-y-6">
         <div>
           <Label>Title</Label>
-          <Input type="text" placeholder="Enter a title game..." />
+          <Controller
+            name="title"
+            control={form.control}
+            render={({ field }) => (
+              <Input
+                type="text"
+                placeholder="Enter a title game..."
+                {...field}
+                hint={form?.formState?.errors?.title?.message}
+              />
+            )}
+          />
         </div>
         <div>
           <Label>Genre</Label>
           <div className="relative">
-            <Select
-              options={optionGenre}
-              placeholder="Select an option"
-              onChange={handleSelectChange}
-              className="dark:bg-dark-900"
+            <Controller
+              name="genreId"
+              control={form.control}
+              render={({ field }) => (
+                <Select
+                  options={optionGenre}
+                  value={field.value}
+                  onChange={(val) => field.onChange(val)}
+                  placeholder="Select a genre"
+                  className="dark:bg-dark-900"
+                />
+              )}
             />
+
             <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 dark:text-gray-400">
               <ChevronDownIcon />
             </span>
@@ -70,12 +87,20 @@ export default function DefaultInputs({
         <div>
           <Label>Platform</Label>
           <div className="relative">
-            <Select
-              options={optionPlatform}
-              placeholder="Select an option"
-              onChange={handleSelectChange}
-              className="dark:bg-dark-900"
+            <Controller
+              name="platformId"
+              control={form.control}
+              render={({ field }) => (
+                <Select
+                  options={optionPlatform}
+                  value={field.value}
+                  onChange={(val) => field.onChange(val)}
+                  placeholder="Select a platform"
+                  className="dark:bg-dark-900"
+                />
+              )}
             />
+
             <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 dark:text-gray-400">
               <ChevronDownIcon />
             </span>
@@ -83,7 +108,18 @@ export default function DefaultInputs({
         </div>
         <div>
           <Label>Game URL</Label>
-          <Input type="text" placeholder="Ex...." />
+          <Controller
+            name="gameUrl"
+            control={form.control}
+            render={({ field }) => (
+              <Input
+                type="text"
+                placeholder="Ex...."
+                {...field}
+                hint={form?.formState?.errors?.gameUrl?.message}
+              />
+            )}
+          />
         </div>
       </div>
     </ComponentCard>

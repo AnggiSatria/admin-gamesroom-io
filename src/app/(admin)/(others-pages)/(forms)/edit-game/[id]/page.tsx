@@ -1,9 +1,5 @@
 import PageBreadcrumb from '@/components/common/PageBreadCrumb';
-import DefaultInputs from '@/components/form/form-elements/DefaultInputs';
-import DropzoneComponent from '@/components/form/form-elements/DropZone';
-import FileInputExample from '@/components/form/form-elements/FileInputExample';
-import TextAreaInput from '@/components/form/form-elements/TextAreaInput';
-import Button from '@/components/ui/button/Button';
+import EditGameComponent from '@/components/form/EditGame/EditGame';
 import { IResponseGetGameById } from '@/shared/lib/helpers/client/services/interfaces/games.interfaces';
 import { Metadata } from 'next';
 import React from 'react';
@@ -26,20 +22,10 @@ export default async function EditGame({ params }: { params: tParams }) {
   );
   const game: IResponseGetGameById = await gameRes.json();
 
-  console.log(game);
-
   return (
     <div>
       <PageBreadcrumb pageTitle="Edit Game" />
-      <div className="grid grid-cols-1 gap-6">
-        <div className="space-y-6">
-          <DefaultInputs game={game} selectedPages="Edit Game" />
-          <TextAreaInput />
-          <FileInputExample />
-          <DropzoneComponent />
-          <Button className="w-full">Edit Game</Button>
-        </div>
-      </div>
+      <EditGameComponent game={game} />
     </div>
   );
 }

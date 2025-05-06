@@ -7,10 +7,6 @@ import {
   putGame,
 } from './fetcher';
 import { activeFilter } from '../interfaces/global.interface';
-import {
-  IRequestPostGame,
-  IRequestPutGame,
-} from '../interfaces/games.interfaces';
 
 export const useReadGames = (activeFilter: activeFilter) => {
   return useQuery({
@@ -36,7 +32,7 @@ export const useReadGameById = (activeFilter: activeFilter, id: string) => {
 
 export const useCreateGame = () => {
   const mutations = useMutation({
-    mutationFn: async (payload: IRequestPostGame) => postGame(payload),
+    mutationFn: async (payload: FormData) => postGame(payload),
     mutationKey: ['create-game'],
   });
 
@@ -45,7 +41,7 @@ export const useCreateGame = () => {
 
 export const useEditGame = (id: string) => {
   const mutations = useMutation({
-    mutationFn: async (payload: IRequestPutGame) => putGame(payload, id),
+    mutationFn: async (payload: FormData) => putGame(payload, id),
     mutationKey: ['edit-game'],
   });
 

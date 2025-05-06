@@ -128,6 +128,9 @@ export default function BasicTableOne<T extends SelectedPage>({
                       <TableCell className="px-4 py-3">
                         {platform?.name}
                       </TableCell>
+                      <TableCell className="px-4 py-3">
+                        {platform?.type}
+                      </TableCell>
                       <TableCell className="flex gap-2 px-4 py-3">
                         <Button
                           onClick={() =>

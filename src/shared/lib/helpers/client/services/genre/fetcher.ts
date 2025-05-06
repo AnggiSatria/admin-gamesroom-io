@@ -23,7 +23,7 @@ export const getGenreById = (activeFilter: activeFilter, id: string) => {
 };
 
 export const postGenre = (payload: IRequestPostGenre) => {
-  return api.post(`${ENDPOINT.Root}${ENDPOINT.Game}`, payload);
+  return api.post(`${ENDPOINT.Root}${ENDPOINT.Genre}`, payload);
 };
 
 export const putGenre = (payload: IRequestPutGenre, id: string) => {

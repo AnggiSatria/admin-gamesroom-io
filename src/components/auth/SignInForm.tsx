@@ -8,7 +8,7 @@ import useHooksLogin from '@/shared/ui/hooks/auth/login';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
-import { signIn } from 'next-auth/react';
+// import { signIn } from 'next-auth/react';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
@@ -42,7 +42,7 @@ export default function SignInForm() {
           <div>
             <div className="grid grid-cols-1 gap-3 sm:gap-5">
               <button
-                onClick={() => signIn('google')}
+                // onClick={() => signIn('google')}
                 className="inline-flex items-center justify-center gap-3 rounded-lg bg-gray-100 px-7 py-3 text-sm font-normal text-gray-700 transition-colors hover:bg-gray-200 hover:text-gray-800 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10"
               >
                 <svg
@@ -146,7 +146,7 @@ export default function SignInForm() {
                   </Link>
                 </div>
                 <div>
-                  <Button className="w-full" size="sm">
+                  <Button type="submit" className="w-full" size="sm">
                     Sign in
                   </Button>
                 </div>

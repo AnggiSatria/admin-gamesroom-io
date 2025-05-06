@@ -34,7 +34,7 @@ export default async function ListPlatforms({
   );
   const platform = res.data;
 
-  const listTH = ['id', 'name', 'action'];
+  const listTH = ['id', 'name', 'type', 'action'];
 
   return (
     <div>

@@ -1,30 +1,18 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import ComponentCard from '../../common/ComponentCard';
 import Input from '../input/InputField';
 import Label from '../Label';
+import { Controller } from 'react-hook-form';
 
 export default function InputStates({
   selectedPages,
+  form,
 }: {
   selectedPages: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  form: any;
 }) {
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState(false);
-
-  // Simulate a validation check
-  const validateEmail = (value: string) => {
-    const isValidEmail =
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
-    setError(!isValidEmail);
-    return isValidEmail;
-  };
-
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setEmail(value);
-    validateEmail(value);
-  };
   return (
     <ComponentCard title={`Form ${selectedPages}`}>
       <div className="space-y-5 sm:space-y-6">
@@ -40,22 +28,25 @@ export default function InputStates({
                     ? 'Name'
                     : null}
           </Label>
-          <Input
-            type="email"
-            defaultValue={email}
-            error={error}
-            onChange={handleEmailChange}
-            placeholder={
-              selectedPages === 'Add Genre'
-                ? 'Enter genre...'
-                : selectedPages === 'Edit Genre'
-                  ? 'Enter genre...'
-                  : selectedPages === 'Add Platform'
-                    ? 'Enter platform...'
-                    : selectedPages === 'Edit Platform'
-                      ? 'Enter platform...'
-                      : ''
-            }
+          <Controller
+            name="name"
+            control={form.control}
+            render={({ field }) => (
+              <Input
+                placeholder={
+                  selectedPages === 'Add Genre'
+                    ? 'Enter genre...'
+                    : selectedPages === 'Edit Genre'
+                      ? 'Enter genre...'
+                      : selectedPages === 'Add Platform'
+                        ? 'Enter platform...'
+                        : selectedPages === 'Edit Platform'
+                          ? 'Enter platform...'
+                          : ''
+                }
+                {...field}
+              />
+            )}
           />
         </div>
         {selectedPages === 'Add Platform' ||
@@ -68,18 +59,22 @@ export default function InputStates({
                   ? 'Type'
                   : null}
             </Label>
-            <Input
-              type="type"
-              defaultValue={''}
-              error={error}
-              onChange={handleEmailChange}
-              placeholder={
-                selectedPages === 'Add Platform'
-                  ? 'Enter type...'
-                  : selectedPages === 'Edit Platform'
-                    ? 'Enter type...'
-                    : ''
-              }
+
+            <Controller
+              name="type"
+              control={form.control}
+              render={({ field }) => (
+                <Input
+                  placeholder={
+                    selectedPages === 'Add Platform'
+                      ? 'Enter type...'
+                      : selectedPages === 'Edit Platform'
+                        ? 'Enter type...'
+                        : ''
+                  }
+                  {...field}
+                />
+              )}
             />
           </div>
         ) : null}
